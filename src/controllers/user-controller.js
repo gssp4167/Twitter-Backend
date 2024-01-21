@@ -1,16 +1,16 @@
-import TweetService from "../services/tweet-service.js";
-const tweetService=new TweetService();
+import UserService from "../services/user-service.js";
+const userService=new UserService();
 
 
-export const createTweet = async (req,res)=>{
+export const signUp = async (req,res)=>{
     try {
         const data=req.body;
         // console.log(data);
-        const response=await tweetService.create(data);
+        const response=await userService.signUp(data);
 
         return res.status(201).json({
             success:true,
-            message:"Successfully created a tweet",
+            message:"Successfully created a user",
             data:response,
             err:{}
         });
@@ -18,21 +18,22 @@ export const createTweet = async (req,res)=>{
         // console.log(error);
         return res.status(500).json({
             success:false,
-            message:"Error encountered in creating a tweet",
+            message:"Error encountered in creating a user",
             data:{},
             err:error
         });
     }
 }
 
-export const getTweet = async (req,res)=>{
+export const signIn = async (req,res)=>{
     try {
-        const id=req.params.id;
-        const response=await tweetService.getTweet(id);
+        const data=req.body;
+        // console.log(data);
+        const response=await userService.signIn(data);
 
         return res.status(201).json({
             success:true,
-            message:"Successfully fetched a tweet",
+            message:"Successfully Signed in a user",
             data:response,
             err:{}
         });
@@ -40,9 +41,10 @@ export const getTweet = async (req,res)=>{
         // console.log(error);
         return res.status(500).json({
             success:false,
-            message:"Error encountered in fetching a tweet",
+            message:"Error encountered in signing in",
             data:{},
             err:error
         });
     }
 }
+
